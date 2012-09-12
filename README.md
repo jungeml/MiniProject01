@@ -19,4 +19,6 @@ constantly write a saying to the terminal that will include an analog
 value. The analog value will control the brightness of the LED in three 
 steps, from low to medium to full brightness. I will also have an 
 interupt driven switch that will cause an LED to blink 10 times after 
-being pushed.
+being pushed. To close the program I will use the classic ^C interrupt that
+properly closes the file and resets defaults.
+
