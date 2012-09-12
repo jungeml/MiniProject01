@@ -16,7 +16,7 @@ It's up to you to decide just what your mini project does, however it must:
 
 I plan to succeed in using all of these requirements. My plan is to 
 constantly write a saying to the terminal that will include an analog 
-value. The analog value will control the brightness of the LED in three 
+value and the tempature using i2c in degrees Fahrenheit. The analog value will control the brightness of the LED in three 
 steps, from low to medium to full brightness. I will also have an 
 interupt driven switch that will cause an LED to blink 10 times after 
 being pushed. To close the program I will use the classic ^C interrupt that
