@@ -8,16 +8,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+
 #define SYSFS_ANALOG_DIR "/sys/devices/platform/omap/tsc"
 
 FILE *fp; 
 
 
-void analog(int Pin)
+int analog(int Pin)
 {
 	char AIN[100];
 	char value[5];
-
+	int An;	
+	
 	sprintf(AIN, SYSFS_ANALOG_DIR"/ain%d", Pin );
 		
 	//Read Value
@@ -30,5 +32,8 @@ void analog(int Pin)
 	
 	fscanf(fp, "%s", &value);    			
 	fclose(fp);
-	printf("the analog value is %s\n\n\n", value);
+	//printf("the analog value is %s\n\n\n", value);
+	An = atoi(value);
+	return An;
+	
 }

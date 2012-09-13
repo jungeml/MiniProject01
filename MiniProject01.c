@@ -9,14 +9,13 @@
 #include "i2c.h"
 #include "flash10.h"
 #include "analog.h"
+#include "pwm.h"
 
 
 #define SYSFS_GPIO_DIR "/sys/class/gpio"
 
 
 char keepgoing =1;
-
-
 
 
 // Callback called when SIGINT is sent to the process (Ctrl-C)
@@ -33,11 +32,15 @@ void main(int argc, char** argv)
 	int res, far;
 	int LedOnePin, timeMS;
 	int AnalogPin, AnalogValue;
+	int freq, duty;
+	int An;
 
-	if (argc < 5){
-		printf("Please enter values: <i2c-bus> <i2c-address> <register>\n" 
+	if (argc < 8){
+		printf("Please enter values: \n" 
+		"<i2c-bus> <i2c-address> <register>\n" 
 		"<LedOnePin> <on/off time in ms>\n"
-		"<Analog Pin>\n", argv[0]);
+		"<Analog Pin>\n"
+		"<freq> \n", argv[0]);
 		exit(-1);
 	}
 	signal(SIGINT, signal_handler);
@@ -48,42 +51,41 @@ void main(int argc, char** argv)
 	LedOnePin  = atoi(argv[4]);
 	timeMS     = atoi(argv[5]);
 	AnalogPin  = atoi(argv[6]);
+	freq       = atoi(argv[7]);
+	
+	
 	
 
 	
 	flash10(LedOnePin, timeMS);
+	
 
 	while(keepgoing){
 	res = i2c(i2cbus, address, daddress);
 	far = res * 9/5 +32;
 	printf("The tempature is: %d in degrees Celcius\n", res);
 	printf("The tempature is: %d in degrees Farhrenheit\n",far);
-	analog(AnalogPin);
-	usleep(500000);	
+	An = analog(AnalogPin);
+	printf("the analog value is %d\n\n\n", An);		
+	
+
+// Depending on the analog value the duty cycle changes
+// The Led has three setting low, medium, and high
+
+	if (An >= 0 && An <=1365){
+		duty = 10;
+	} else if (An >= 1365 && An <= 2730){
+		duty = 40;
+	} else {
+		duty = 100;
+	}
+	
+	pwm(freq, duty);
+	
 	}
 	
 		
 	
-/*
-PWM led settings:
-
-use hardware pwm ehrpwm2:0
-use given frequency to control pwm led
-use 3 analog ranges to change LEDduty from 5, 50, 100 percent
-
-pwm setup:
-
-open file: /sys/ker/nel/debug/omap_mux/lcd_data0
-change mode to 3
-close file
-
-open file: /sys/class/pwm/ehrpwm.2:0
-change run=1, period_freq=LEDfreq, LEDduty based on analog value
-close file  
-
-
-
-*/
 
 }
 
