@@ -50,7 +50,8 @@ void main(int argc, char** argv)
 	AnalogPin  = atoi(argv[6]);
 	
 
-	//flash10(LedOnePin, timeMS);
+	
+	flash10(LedOnePin, timeMS);
 
 	while(keepgoing){
 	res = i2c(i2cbus, address, daddress);

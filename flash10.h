@@ -17,7 +17,7 @@
 
 FILE *fp; 
 
-void flash(int Pin, int newON)
+void flash10(int Pin, int newON)
 {
 	//create a variable to store whether we are sending a '1' or a '0'
 	char set_value[5]; 
@@ -47,7 +47,7 @@ void flash(int Pin, int newON)
 		fclose(fp);
 	sprintf(PinDirection, SYSFS_GPIO_DIR"/gpio%d/direction", Pin);
 	sprintf(PinValue, SYSFS_GPIO_DIR"/gpio%d/value", Pin );
-	printf("...export file accessed, new pin now accessible\n");
+	//printf("...export file accessed, new pin now accessible\n");
 	
 	//SET DIRECTION
 	//Open the LED's sysfs file in binary for reading and writing, store file pointer in fp
@@ -62,7 +62,7 @@ void flash(int Pin, int newON)
 	strcpy(set_value,"out");
 	fwrite(&set_value, sizeof(char), 3, fp);
 	fclose(fp);
-	printf("...direction set to output\n");
+	//printf("...direction set to output\n");
 			
 	if ((fp = fopen(PinValue, "rb+")) == NULL)
 	{
@@ -70,7 +70,7 @@ void flash(int Pin, int newON)
 		exit(1);
 	}
 	//Run an infinite loop - will require Ctrl-C to exit this program
-	
+	count=0;
 	while(count<20)
 	{
 		toggle = !toggle;
