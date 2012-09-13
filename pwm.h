@@ -89,6 +89,7 @@ void pwm(int freq, int duty)
 		sprintf(set_value,"0");
 		fwrite(&set_value, sizeof(char), 3, fp);
 		fclose(fp);
+
 }
 
 

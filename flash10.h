@@ -1,3 +1,7 @@
+// Edited by Michael Junge
+//
+//
+//
 // Blink pin 3 on port B at 1 Hz
 // Just add an LED and see the light! ;)
 //
