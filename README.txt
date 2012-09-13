@@ -25,7 +25,17 @@ classic ^C interrupt that properly closes the file and resets defaults.
 
 How to use the finished code:
 
-Compile MiniProject01.c or just use Mini01 which is already compiled.
+Compile MiniProject01.c or just use Mini01 which is already compiled. You must download all of the files listed below in order for the code to run properly. They are:
+
+analog.h
+i2c-dev.h
+interupt.h
+flash10.h i2c.h
+MiniProject01.c
+pwm.h
+
+The code will not compile if even only one header file is forgotten.
+
 
 When you run Mini01 without any inputs to main you recieve the following: 
 "
