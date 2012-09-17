@@ -69,3 +69,5 @@ pwm.h:39:27: warning: unknown escape sequence: '\:'
 pwm.h:40:27: warning: unknown escape sequence: '\:'
 
 However, the code runs fine if you ignore the warnings.
+
+./Mini01 3 72 0 60 100 100 7 6 for command line
